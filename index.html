@@ -1,0 +1,552 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Elaija Chechi ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, serif;
+    background: linear-gradient(135deg,#f8efff,#ffeaf3,#eee5ff);
+    color: #684c79;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.page {
+    display: none;
+    min-height: 100vh;
+    padding: 35px 20px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    animation: fade .7s ease;
+}
+
+.page.active {
+    display: flex;
+}
+
+@keyframes fade {
+    from {opacity:0; transform:translateY(15px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+h1 {
+    font-size: 30px;
+    margin-bottom: 18px;
+    color: #895eaa;
+}
+
+h2 {
+    color: #a16aab;
+    margin-bottom: 18px;
+}
+
+p {
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+button {
+    border: none;
+    background: linear-gradient(135deg,#c69cde,#edafd0);
+    color: white;
+    padding: 13px 27px;
+    border-radius: 30px;
+    font-size: 16px;
+    margin: 12px 5px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px #b68dbb55;
+}
+
+button:active {
+    transform: scale(.96);
+}
+
+.card {
+    background: #ffffffc9;
+    padding: 28px 22px;
+    border-radius: 22px;
+    width: 100%;
+    max-width: 430px;
+    box-shadow: 0 8px 30px #ad86ba30;
+}
+
+input[type="password"],
+input[type="text"] {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #d9b8e6;
+    border-radius: 12px;
+    margin-top: 18px;
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+    background: white;
+    color: #684c79;
+}
+
+.show-password {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.show-password input {
+    width: 17px;
+    height: 17px;
+    accent-color: #b78acb;
+}
+
+/* PHOTO RATIO: 3:4 */
+.photo {
+    width: 100%;
+    max-width: 330px;
+    aspect-ratio: 3 / 4;
+    height: auto;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px #8d649a40;
+    margin: 15px auto;
+    display: block;
+    transition: opacity .3s ease;
+}
+
+.photo-count {
+    margin: 8px;
+    color: #a16aab;
+}
+
+.letter {
+    text-align: left;
+    white-space: pre-line;
+    line-height: 1.9;
+    font-size: 16px;
+}
+
+.heart {
+    font-size: 35px;
+    margin: 15px;
+    animation: beat 1.3s infinite;
+}
+
+@keyframes beat {
+    50% {transform:scale(1.2);}
+}
+
+.floating {
+    position: fixed;
+    top: -30px;
+    color: #d49acb;
+    animation: fall 7s linear infinite;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+.small {
+    font-size: 13px;
+    color: #a58aa9;
+    margin-top: 20px;
+}
+
+@media(max-width:400px) {
+    h1 {font-size:26px;}
+    .photo {
+        max-width: 330px;
+        aspect-ratio: 3 / 4;
+        height: auto;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- PAGE 1: WELCOME -->
+<section class="page active" id="page1">
+<div class="card">
+
+    <div class="heart">💜</div>
+
+    <h1>A Little Surprise</h1>
+    <h2>For Someone Special</h2>
+
+    <p>
+    Some people enter our lives<br>
+    and become beautiful memories.<br><br>
+    This little surprise is just for you,
+    Elaija Chechi. 🌷
+    </p>
+
+    <button onclick="showPage(2)">
+    Open Your Surprise ♡
+    </button>
+
+    <p class="small">Made with love 💗</p>
+
+</div>
+</section>
+
+
+<!-- PAGE 2: PASSWORD -->
+<section class="page" id="page2">
+<div class="card">
+
+    <div class="heart">🔐</div>
+
+    <h1>A Little Secret</h1>
+
+    <p>Enter the password to unlock your surprise.</p>
+
+    <input
+    type="password"
+    id="password"
+    placeholder="Enter password"
+    onkeydown="if(event.key==='Enter') checkPassword()"
+    >
+
+    <label class="show-password">
+        <input type="checkbox" id="showPassword"
+        onchange="togglePassword()">
+        Show Password 👁
+    </label>
+
+    <button onclick="checkPassword()">
+    Unlock ❤️
+    </button>
+
+    <p id="error" style="color:#d66b91;margin-top:10px;"></p>
+
+</div>
+</section>
+
+
+<!-- PAGE 3: AUTOMATIC SLIDESHOW -->
+<section class="page" id="page3">
+<div class="card">
+
+    <h1>Beautiful Memories 🌸</h1>
+
+    <p>Every picture has a little story.</p>
+
+    <img
+    id="slidePhoto"
+    class="photo"
+    src="photos/photo1.jpg"
+    alt="Memory photo"
+    >
+
+    <div class="photo-count" id="photoCount">
+    1 / 5
+    </div>
+
+    <p class="small">
+    ✨ Photos change automatically every 3 seconds ✨
+    </p>
+
+    <button onclick="previousPhoto()">
+    ❮ Previous
+    </button>
+
+    <button onclick="nextPhoto()">
+    Next ❯
+    </button>
+
+    <br>
+
+    <button onclick="showPage(4)">
+    Continue ♡
+    </button>
+
+</div>
+</section>
+
+
+<!-- PAGE 4: FRIENDSHIP LETTER -->
+<section class="page" id="page4">
+<div class="card">
+
+    <div class="heart">💌</div>
+
+    <h1>A Letter For You</h1>
+
+    <div class="letter">
+
+Dear Elaija Chechi,
+
+I just want to say thank you for being such a special person in my life.
+
+Your friendship, kindness, care and the beautiful moments we shared mean a lot to me.
+
+Sometimes, we meet people who make our days a little brighter without even knowing it. You are one of those people.
+
+Thank you for every smile, every conversation, every little support and every beautiful memory.
+
+I may not express everything perfectly, but I truly appreciate having you in my life.
+
+No matter where life takes us, I will always remember this beautiful friendship with a smile.
+
+You are truly special. ❤️
+
+With lots of love and respect,
+A person who is grateful for your friendship.
+       - SARAN💜
+
+    </div>
+
+    <button onclick="showPage(5)">
+    One Last Surprise ♡
+    </button>
+
+</div>
+</section>
+
+
+<!-- PAGE 5: FINAL SURPRISE -->
+<section class="page" id="page5">
+<div class="card">
+
+    <div class="heart">🌷</div>
+
+    <h1>Thank You, Elaija Chechi!</h1>
+
+    <img
+    src="photos/photo6.jpg"
+    class="photo"
+    alt="Final special memory"
+    >
+
+    <h2>Stay Happy Always ❤️</h2>
+
+    <p>
+    May your life always be filled with happiness,
+    peace, success and countless beautiful moments.
+    Keep smiling and keep shining! ✨
+    </p>
+
+    <hr style="border:0;border-top:1px solid #e5cce9;margin:22px 0;">
+
+    <h2>Oru Karyam Parayan Undu... 🥺</h2>
+
+    <p class="letter">
+
+Elaija Chechi,
+
+Njan cheytha thettukalkokke manassarinju sorry parayunnu.
+
+Ente bhagath ninnum ariyathe enganelum vishamippichittundenkil ennod shamikkane.
+
+Njan perfect alla, chilappol thettukal pattiyittundakam. Pakshe ningal enikku thanna friendshipum snehavum njan orikkalum marakkilla.
+
+Ennod kshamikkanam.
+
+Thank you for being a part of my life. ❤️
+
+    </p>
+
+    <div class="heart">💗</div>
+
+    <h2>You're Always Special!</h2>
+
+    <p class="small">
+    With love, care and respect. ♡
+    </p>
+
+</div>
+</section>
+
+
+<script>
+
+// PAGE NAVIGATION
+
+function showPage(number) {
+
+    document.querySelectorAll('.page').forEach(page => {
+        page.classList.remove('active');
+    });
+
+    document.getElementById('page' + number)
+    .classList.add('active');
+
+    window.scrollTo(0,0);
+
+    // Slideshow timer control
+    if(number === 3) {
+        startSlideshow();
+    } else {
+        stopSlideshow();
+    }
+}
+
+
+// PASSWORD SHOW / HIDE
+
+function togglePassword() {
+
+    const passwordInput =
+    document.getElementById('password');
+
+    const checkbox =
+    document.getElementById('showPassword');
+
+    passwordInput.type =
+    checkbox.checked ? 'text' : 'password';
+}
+
+
+// PASSWORD CHECK
+
+function checkPassword() {
+
+    const entered = document
+    .getElementById('password')
+    .value
+    .trim()
+    .toLowerCase();
+
+    if(entered === 'elaija') {
+
+        document.getElementById('error').textContent = '';
+
+        showPage(3);
+
+    } else {
+
+        document.getElementById('error').textContent =
+        'Wrong password! Try again 💗';
+
+    }
+}
+
+
+// PHOTO SLIDESHOW
+
+const photos = [
+    'photos/photo1.jpg',
+    'photos/photo2.jpg',
+    'photos/photo3.jpg',
+    'photos/photo4.jpg',
+    'photos/photo5.jpg'
+];
+
+let currentPhoto = 0;
+let slideTimer = null;
+
+function updatePhoto() {
+
+    const photoElement =
+    document.getElementById('slidePhoto');
+
+    photoElement.style.opacity = '0';
+
+    setTimeout(() => {
+
+        photoElement.src = photos[currentPhoto];
+
+        photoElement.onload = () => {
+            photoElement.style.opacity = '1';
+        };
+
+        photoElement.onerror = () => {
+            photoElement.style.opacity = '1';
+        };
+
+    }, 200);
+
+    document.getElementById('photoCount').textContent =
+    (currentPhoto + 1) + ' / 5';
+}
+
+
+function nextPhoto() {
+
+    currentPhoto =
+    (currentPhoto + 1) % photos.length;
+
+    updatePhoto();
+}
+
+
+function previousPhoto() {
+
+    currentPhoto =
+    (currentPhoto - 1 + photos.length) % photos.length;
+
+    updatePhoto();
+}
+
+
+// AUTOMATIC SLIDESHOW - 3 SECONDS
+
+function startSlideshow() {
+
+    stopSlideshow();
+
+    slideTimer = setInterval(() => {
+        nextPhoto();
+    }, 3000);
+}
+
+
+function stopSlideshow() {
+
+    if(slideTimer !== null) {
+        clearInterval(slideTimer);
+        slideTimer = null;
+    }
+}
+
+
+// FLOATING HEARTS AND FLOWERS
+
+const symbols = ['💗','♡','🌸','✨'];
+
+function createFloating() {
+
+    const item = document.createElement('div');
+
+    item.className = 'floating';
+
+    item.textContent =
+    symbols[Math.floor(Math.random() * symbols.length)];
+
+    item.style.left = Math.random() * 100 + 'vw';
+
+    item.style.fontSize =
+    (15 + Math.random() * 15) + 'px';
+
+    item.style.animationDuration =
+    (5 + Math.random() * 5) + 's';
+
+    document.body.appendChild(item);
+
+    setTimeout(() => item.remove(),10000);
+}
+
+setInterval(createFloating,800);
+
+</script>
+
+</body>
+</html>
